@@ -2,17 +2,19 @@ using Microsoft.Extensions.Options;
 
 namespace AspNetCoreOptionsSnapshotInService
 {
-    public class CustomerService {
+    public class CustomerService
+    {
         private readonly SupplyApiClientHttpSettings settings;
 
-        public CustomerService(
-            IOptionsSnapshot<SupplyApiClientHttpSettings> settings)
+        public CustomerService(IOptionsSnapshot<SupplyApiClientHttpSettings> options)
         {
-            this.settings = settings.Value;
+            this.settings = options.Value;
         }
 
-        public Customer GetCustomer() {
-            return new Customer {
+        public Customer GetCustomer()
+        {
+            return new Customer
+            {
                 SomeValue = settings.SomeValue
             };
         }

@@ -12,32 +12,25 @@ namespace AspNetCoreOptionsSnapshotInService
 {
     public class Startup
     {
-    IConfiguration Configuration; 
+        IConfiguration Configuration; 
 
-    public Startup()
-    {
-        var builder = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json");
-
-        Configuration = builder.Build();
-    }
-
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.Configure<SupplyApiClientHttpSettings>(Configuration);
-        services.AddScoped<CustomerService>();
-        services.AddMvc();
-    }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public Startup()
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+        }
 
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure<SupplyApiClientHttpSettings>(Configuration);
+            services.AddScoped<CustomerService>();
+            services.AddMvc();
+        }
+
+        public void Configure(IApplicationBuilder app)
+        {
             app.UseMvcWithDefaultRoute();
         }
     }

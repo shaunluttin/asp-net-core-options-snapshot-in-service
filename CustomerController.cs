@@ -3,16 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreOptionsSnapshotInService
 {
-    public class CustomerController : Controller
+    public class SomeController : Controller
     {
         private readonly CustomerService customerService;
 
-        public CustomerController(CustomerService customerService)
+        public SomeController(CustomerService customerService)
         {
             this.customerService = customerService;
         }
 
-        public IActionResult Index() {
+        public IActionResult Index() 
+        {
             return Json(customerService.GetCustomer());
         }
     }
