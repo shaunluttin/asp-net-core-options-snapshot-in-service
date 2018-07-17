@@ -4,18 +4,18 @@ namespace AspNetCoreOptionsSnapshotInService
 {
     public class CustomerService
     {
-        private readonly SupplyApiClientHttpSettings settings;
+        private readonly IOptionsSnapshot<SupplyApiClientHttpSettings> snapshot;
 
-        public CustomerService(IOptionsSnapshot<SupplyApiClientHttpSettings> options)
+        public CustomerService(IOptionsSnapshot<SupplyApiClientHttpSettings> snapshot)
         {
-            this.settings = options.Value;
+            this.snapshot = snapshot;
         }
 
         public Customer GetCustomer()
         {
             return new Customer
             {
-                SomeValue = settings.SomeValue
+                SomeValue = snapshot.Value.SomeValue
             };
         }
     }

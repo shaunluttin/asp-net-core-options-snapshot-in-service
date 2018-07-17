@@ -12,13 +12,13 @@ namespace AspNetCoreOptionsSnapshotInService
 {
     public class Startup
     {
-        IConfiguration Configuration; 
+        IConfiguration Configuration;
 
         public Startup()
         {
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
         }
 
